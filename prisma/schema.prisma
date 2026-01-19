@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int    @id @default(autoincrement())
+  email          String @unique @db.VarChar(100)
+  password       String @db.VarChar(200)
+  name           String @db.VarChar(100)
+  createdAt      DateTime @default(now())
+
+  files    File[]
+  folder   Folder[]
+
+  @@map("users")
+}
+
+model File {
+  id             Int    @id @default(autoincrement())
+  fileName       String @db.VarChar(200)
+  fileSystemName String @unique
+  mimeType       String @db.VarChar(100)
+  size           Int
+  path           String @db.VarChar(300)
+  createdAt      DateTime @default(now())
+
+  userId         Int
+  user           User @relation(fields: [userId], references: [id])
+
+  folderId       Int?
+  folder         Folder? @relation(fields: [folderId], references: [id], onDelete: Cascade)
+
+  @@map("files")
+}
+
+
+model Folder {
+  id             Int    @id @default(autoincrement())
+  name           String @db.VarChar(100)
+  createdAt      DateTime @default(now())
+  
+  parentId       Int?
+  parent         Folder?  @relation("ParentChildern", fields: [parentId], references: [id], onDelete: Cascade)
+
+  childern       Folder[] @relation("ParentChildern")
+
+  userId         Int
+  user           User @relation(fields: [userId], references: [id])
+
+  files          File[]
+
+  @@map("folders")
+}
