@@ -1,4 +1,4 @@
-# Mini Google Drive API 📂
+# Mini Google Drive API 
 
 Project belajar backend membuat layanan penyimpanan file sederhana (File Storage Service) menggunakan Node.js.
 
@@ -11,11 +11,11 @@ Project belajar backend membuat layanan penyimpanan file sederhana (File Storage
 * **Testing:** Vitest & Supertest
 
 ## Fitur Utama
-* ✅ Register & Login (JWT Auth)
-* ✅ Upload File (Multer Stream)
-* ✅ Create Recursive Folder (Folder dalam Folder)
-* ✅ Download File (Stream Processing)
-* ✅ Delete Folder & File (Cascade Delete)
+*  Register & Login (JWT Auth)
+*  Upload File (Multer Stream)
+*  Create Recursive Folder (Folder dalam Folder)
+*  Download File (Stream Processing)
+*  Delete Folder & File (Cascade Delete)
 
 ## Cara Menjalankan (Local)
 1. Clone repo ini
